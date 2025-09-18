@@ -161,9 +161,9 @@ HTML;
              $nomeTabelaUC=ucfirst($nomeTabela);
              $atributos=$this->buscaAtributos($nomeTabela);
              $attr = "";
-             $id = "";
+             $id="";
              foreach($atributos as $atributo){
-                if($atributos->key=="PRI")
+                if($atributo->Key=="PRI")
                     $id="{\$dado['{$atributo->Field}']}";
 
                 $attr.="echo \"<td>{\$dado['{$atributo->Field}']}</td>\";\n";
@@ -181,13 +181,13 @@ HTML;
       require_once("../dao/{$nomeTabelaUC}Dao.php");
    \$dao=new {$nomeTabela}DAO();
    \$dados=\$dao->listaGeral();
-   echo "<table border=1>";
+   echo"<table border=1>";
     foreach(\$dados as \$dado){
         echo "<tr>";
-       {$attr}
+       {$attr};
        echo "<td><a href='../control/{$nomeTabela}Control.php?a=2&id={$id}'>Excluir</a></td>";
        echo "<td>Alterar</td>";
-       echo "</tr>";
+       echo "<tr>";
     }
     echo "</table>";
      ?>  
@@ -263,7 +263,7 @@ class {$nomeClasse}Control {
           break;
           case 2:
             \$this->excluir();
-          break;
+            break;
        }
     }
     function inserir(){
@@ -316,7 +316,7 @@ function ClassesDao(){
             $nomeTabela = array_values((array)$tabela)[0];
             $nomeClasse = ucfirst($nomeTabela);
             $atributos=$this->buscaAtributos($nomeTabela);
-            $id="";
+            $id ="";
             foreach($atributos as $atributo){
                 if($atributo->Key == "PRI")
                     $id = $atributo->Field;
@@ -356,9 +356,11 @@ function listaGeral(){
     return \$dados;
 }
 function excluir(\$id){
-    \$sql = "delete from {$nomeTabela} where {$id}=\$id";
+    \$sql = "DELETE FROM {$nomeTabela} WHERE {$id}=\$id";
     \$query = \$this->con->query(\$sql);
-    header("Location:../view/Lista{$nomeClasse}.php");
+    header("Location:../view/Lista{$nomeTabela}.php");
+
+
 }
 }
 ?>
